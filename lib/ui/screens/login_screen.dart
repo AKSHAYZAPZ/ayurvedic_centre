@@ -22,7 +22,32 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 217, width: double.infinity),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: 217,
+                  width: double.infinity,
+                  child: Image.asset(
+                    'assets/images/Frame_176.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  child: SizedBox(
+                    height: 84,
+                    width: 84,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(42),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(

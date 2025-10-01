@@ -11,37 +11,29 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SplashProvider>(
       builder: (context, splash, _) {
-        if (splash.loading) {
-          return Scaffold(
-            body:Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
-                  child: Image.asset(
-                    'assets/images/splash.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            )
-          );
-        } else {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          if (!splash.loading) {
+            await Future.delayed(const Duration(seconds: 2));
             if (splash.isAuthenticated == true) {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => HomeScreen()),
+                MaterialPageRoute(builder: (_) => const HomeScreen()),
               );
             } else {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => LoginScreen()),
+                MaterialPageRoute(builder: (_) =>  LoginScreen()),
               );
             }
-          });
+          }
+        });
 
-          return const Scaffold(body: SizedBox.shrink());
-        }
+        return Scaffold(
+          body: SizedBox.expand(
+            child: Image.asset(
+              'assets/images/splash.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
       },
     );
   }
