@@ -12,8 +12,20 @@ class SplashScreen extends StatelessWidget {
     return Consumer<SplashProvider>(
       builder: (context, splash, _) {
         if (splash.loading) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+          return Scaffold(
+            body:Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: double.infinity,
+                  child: Image.asset(
+                    'assets/images/splash.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            )
           );
         } else {
           WidgetsBinding.instance.addPostFrameCallback((_) {

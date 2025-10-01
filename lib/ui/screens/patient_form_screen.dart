@@ -32,7 +32,41 @@ class _PatientFormScreenState extends State<PatientFormScreen> {
     final provider = context.watch<PatientProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Register Patient')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const Icon(Icons.notifications_outlined, size: 28),
+                Positioned(
+                  right: 2,
+                  top: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 10,
+                      minHeight: 10,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+        scrolledUnderElevation: 0.0,
+      ),
       body: provider.loading
           ? const Center(child: CircularProgressIndicator())
           : Padding(

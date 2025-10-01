@@ -32,9 +32,41 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = context.watch<HomeProvider>();
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const Icon(Icons.notifications_outlined, size: 28),
+                Positioned(
+                  right: 2,
+                  top: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 10,
+                      minHeight: 10,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
         scrolledUnderElevation: 0.0,
-        title: const Text('Patients'),
       ),
+
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 18, right: 18, bottom: 18),
         child: AppButton(
@@ -103,10 +135,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: ColorConstants.grey),
-                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(width: 1, color: ColorConstants.grey.withValues(alpha: 0.2)),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    // child: ,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18,vertical: 6),
+                      child: Row(
+                        children: [
+                          Text('Date',style: TextStyle(color: ColorConstants.grey,fontSize: 15,),),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Icon(Icons.keyboard_arrow_down,size: 18,color: ColorConstants.green,)
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
